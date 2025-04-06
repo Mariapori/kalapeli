@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7p870qpog5wc"]
+
+[ext_resource type="Texture2D" uid="uid://bxe467txf8x6u" path="res://imgs/water.png" id="1_cxbi0"]
+[ext_resource type="PackedScene" uid="uid://xprq54edccbc" path="res://scenes/pelaaja.tscn" id="2_lnnbt"]
+
+[node name="Pelimaailma" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2643.0
+offset_top = -2328.0
+offset_right = 2841.0
+offset_bottom = 2259.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cxbi0")
+stretch_mode = 1
+
+[node name="Pelaaja" parent="." instance=ExtResource("2_lnnbt")]
+position = Vector2(-1468, 875)
