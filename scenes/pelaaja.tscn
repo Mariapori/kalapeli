@@ -6,17 +6,20 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rbvrm"]
 size = Vector2(440, 152)
 
-[sub_resource type="FontVariation" id="FontVariation_5b8an"]
+[sub_resource type="FontVariation" id="FontVariation_rbvrm"]
 variation_embolden = 0.7
 
 [sub_resource type="LabelSettings" id="LabelSettings_rbvrm"]
-font = SubResource("FontVariation_5b8an")
-font_size = 31
+font = SubResource("FontVariation_rbvrm")
+font_size = 69
+font_color = Color(1, 1, 0, 1)
 
 [node name="Pelaaja" type="Node2D"]
 script = ExtResource("1_rbvrm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_wtq13")
@@ -32,9 +35,9 @@ shape = SubResource("RectangleShape2D_rbvrm")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -47.0
-offset_top = -112.0
+offset_top = -164.0
 offset_right = 45.0
-offset_bottom = -59.0
+offset_bottom = -69.0
 text = "0"
 label_settings = SubResource("LabelSettings_rbvrm")
 horizontal_alignment = 1

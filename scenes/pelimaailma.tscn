@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7p870qpog5wc"]
+[gd_scene load_steps=5 format=3 uid="uid://b7p870qpog5wc"]
 
 [ext_resource type="Texture2D" uid="uid://bxe467txf8x6u" path="res://imgs/water.png" id="1_cxbi0"]
 [ext_resource type="PackedScene" uid="uid://xprq54edccbc" path="res://scenes/pelaaja.tscn" id="2_lnnbt"]
+[ext_resource type="PackedScene" uid="uid://diuprd1c7j2y6" path="res://scenes/spawner.tscn" id="3_2nso3"]
 [ext_resource type="PackedScene" uid="uid://dcqqakpde61dp" path="res://scenes/kala.tscn" id="3_u5a6y"]
 
 [node name="Pelimaailma" type="Node2D"]
@@ -10,10 +11,10 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2643.0
-offset_top = -2328.0
-offset_right = 2841.0
-offset_bottom = 2259.0
+offset_left = -2165.0
+offset_top = -16641.0
+offset_right = 35856.0
+offset_bottom = 1659.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_cxbi0")
@@ -22,9 +23,8 @@ stretch_mode = 1
 [node name="Pelaaja" parent="." instance=ExtResource("2_lnnbt")]
 position = Vector2(-1468, 875)
 
-[node name="Kala" parent="." instance=ExtResource("3_u5a6y")]
-position = Vector2(454, 1131)
-
-[node name="Kala2" parent="." instance=ExtResource("3_u5a6y")]
-position = Vector2(1094, 467)
-level = 20
+[node name="Spawner" parent="." instance=ExtResource("3_2nso3")]
+position = Vector2(-419, 837)
+fish_scene = ExtResource("3_u5a6y")
+player_node = NodePath("../Pelaaja")
+border_node = NodePath("../TextureRect")
