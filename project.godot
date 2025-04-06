@@ -14,6 +14,14 @@ config/name="Kalapeli"
 run/main_scene="uid://b7p870qpog5wc"
 config/features=PackedStringArray("4.4", "Mobile")
 
+[global_group]
+
+player=""
+
+[layer_names]
+
+2d_physics/layer_1="kalat"
+
 [rendering]
 
 renderer/rendering_method="mobile"

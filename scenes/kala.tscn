@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcqqakpde61dp"]
+
+[ext_resource type="Texture2D" uid="uid://pp3gkpa4j38x" path="res://imgs/ahven.png" id="1_5b8an"]
+[ext_resource type="Script" uid="uid://767y7vu73k2d" path="res://scripts/kala.gd" id="1_3834w"]
+
+[sub_resource type="FontVariation" id="FontVariation_3834w"]
+variation_embolden = 0.7
+
+[sub_resource type="LabelSettings" id="LabelSettings_5b8an"]
+font = SubResource("FontVariation_3834w")
+font_size = 31
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5b8an"]
+size = Vector2(377, 204)
+
+[node name="Kala" type="Node2D"]
+script = ExtResource("1_3834w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5b8an")
+
+[node name="Label" type="Label" parent="."]
+offset_top = -167.0
+offset_right = 92.0
+offset_bottom = -114.0
+text = "0"
+label_settings = SubResource("LabelSettings_5b8an")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10.5, -6)
+shape = SubResource("RectangleShape2D_5b8an")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

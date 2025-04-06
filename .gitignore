@@ -1,6 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
-<<<<<<< HEAD
 
 # Godot-specific ignores
 .import/
@@ -16,4 +15,4 @@ data_*/
 mono_crash.*.json
 =======
 /android/
->>>>>>> 62de8b6 (inits)
+.DS_Store

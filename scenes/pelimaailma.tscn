@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7p870qpog5wc"]
+[gd_scene load_steps=4 format=3 uid="uid://b7p870qpog5wc"]
 
 [ext_resource type="Texture2D" uid="uid://bxe467txf8x6u" path="res://imgs/water.png" id="1_cxbi0"]
 [ext_resource type="PackedScene" uid="uid://xprq54edccbc" path="res://scenes/pelaaja.tscn" id="2_lnnbt"]
+[ext_resource type="PackedScene" uid="uid://dcqqakpde61dp" path="res://scenes/kala.tscn" id="3_u5a6y"]
 
 [node name="Pelimaailma" type="Node2D"]
 
@@ -20,3 +21,10 @@ stretch_mode = 1
 
 [node name="Pelaaja" parent="." instance=ExtResource("2_lnnbt")]
 position = Vector2(-1468, 875)
+
+[node name="Kala" parent="." instance=ExtResource("3_u5a6y")]
+position = Vector2(454, 1131)
+
+[node name="Kala2" parent="." instance=ExtResource("3_u5a6y")]
+position = Vector2(1094, 467)
+level = 20
