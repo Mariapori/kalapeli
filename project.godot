@@ -14,6 +14,10 @@ config/name="Kalapeli"
 run/main_scene="uid://b7p870qpog5wc"
 config/features=PackedStringArray("4.4", "Mobile")
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [global_group]
 
 player=""
@@ -25,3 +29,4 @@ player=""
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

@@ -52,7 +52,7 @@ func _on_Timer_timeout():
 		
 		# Luodaan uusi kala
 		var fish = fish_scene.instantiate() as Node2D
-		fish.level = clamp(randi() % (player.level + 1), 1, player.level + 1)
+		fish.level = clamp(randi() % (player.level + 1), 1, player.level + 50)
 		fish.global_position = spawn_position
 		get_parent().add_child(fish)
 		# Lisätään kala ryhmään "fish", jotta sitä voidaan myöhemmin hakea helposti
