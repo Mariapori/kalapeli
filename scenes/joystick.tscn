@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://le5fdeituu0f"]
+
+[sub_resource type="GDScript" id="GDScript_demt0"]
+script/source = "extends Node2D
+
+@export var deadzone: float = 0.1       # Minimum distance before considering movement (0.0 - 1.0)
+@export var max_radius: float = 100.0     # Maximum movement radius (in pixels)
+var input_vector: Vector2 = Vector2.ZERO # The output joystick vector
+
+var dragging: bool = false
+
+func _ready():
+	pass
+func _gui_input(event: InputEvent) -> void:
+	# We handle touch and mouse events
+	if event is InputEventScreenTouch or event is InputEventMouseButton:
+		if event.pressed:
+			# Check if the touch is inside the joystick area
+			if $Background.get_rect().has_point(to_local(event.position)):
+				dragging = true
+				_update_handle_position(event.position)
+		else:
+			# When the touch is released, reset the joystick
+			dragging = false
+			input_vector = Vector2.ZERO
+			$Background/Handle.position = $Background.rect_size / 2
+
+	elif event is InputEventScreenDrag or event is InputEventMouseMotion:
+		if dragging:
+			_update_handle_position(event.position)
+
+func _update_handle_position(global_pos: Vector2) -> void:
+	var local_pos = $Background.get_global_transform().affine_inverse().basis_xform(global_pos)
+	# Calculate offset from the center of the joystick
+	var center = $Background.rect_size / 2
+	var offset = local_pos - center
+
+	# Clamp offset to the maximum radius
+	if offset.length() > max_radius:
+		offset = offset.normalized() * max_radius
+	
+	# Update the handle position
+	$Background/Handle.position = center + offset
+	
+	# Calculate the input vector (normalized relative to max_radius)
+	var factor = offset.length() / max_radius
+	if factor < deadzone:
+		input_vector = Vector2.ZERO
+	else:
+		input_vector = offset.normalized() * factor
+
+	# You can now use input_vector for movement input or send a signal, e.g.:
+	# emit_signal(\"joystick_moved\", input_vector)
+"
+
+[sub_resource type="Gradient" id="Gradient_g36iv"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0.67451, 1, 1, 1, 0.266667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qxmy8"]
+gradient = SubResource("Gradient_g36iv")
+
+[sub_resource type="Gradient" id="Gradient_m03u7"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_luu5j"]
+gradient = SubResource("Gradient_m03u7")
+
+[node name="Joystick" type="Node2D"]
+script = SubResource("GDScript_demt0")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 94.0
+offset_bottom = 94.0
+texture = SubResource("GradientTexture2D_qxmy8")
+
+[node name="Handle" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 81.0
+offset_bottom = 80.0
+texture = SubResource("GradientTexture2D_luu5j")

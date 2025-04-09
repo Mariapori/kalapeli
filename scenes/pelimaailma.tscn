@@ -1,30 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7p870qpog5wc"]
+[gd_scene load_steps=6 format=3 uid="uid://b7p870qpog5wc"]
 
 [ext_resource type="Texture2D" uid="uid://bxe467txf8x6u" path="res://imgs/water.png" id="1_cxbi0"]
 [ext_resource type="PackedScene" uid="uid://xprq54edccbc" path="res://scenes/pelaaja.tscn" id="2_lnnbt"]
 [ext_resource type="PackedScene" uid="uid://diuprd1c7j2y6" path="res://scenes/spawner.tscn" id="3_2nso3"]
 [ext_resource type="PackedScene" uid="uid://dcqqakpde61dp" path="res://scenes/kala.tscn" id="3_u5a6y"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="5_mofo5"]
 
 [node name="Pelimaailma" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 4096
+position = Vector2(-1468, 896)
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2165.0
-offset_top = -16641.0
-offset_right = 35856.0
-offset_bottom = 1659.0
+offset_left = -74523.0
+offset_top = -10169.0
+offset_right = 310301.0
+offset_bottom = 9770.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_cxbi0")
 stretch_mode = 1
-
-[node name="Pelaaja" parent="." instance=ExtResource("2_lnnbt")]
-position = Vector2(-1468, 875)
 
 [node name="Spawner" parent="." instance=ExtResource("3_2nso3")]
 position = Vector2(-419, 837)
 fish_scene = ExtResource("3_u5a6y")
 player_node = NodePath("../Pelaaja")
 border_node = NodePath("../TextureRect")
+
+[node name="Pelaaja" parent="." node_paths=PackedStringArray("cam", "joystick") instance=ExtResource("2_lnnbt")]
+position = Vector2(-1468, 875)
+zoom_factor = 1.0
+max_zoom_out = 1.0
+min_zoom_in = 0.1
+cam = NodePath("../Camera2D")
+joystick = NodePath("../CanvasLayer/Virtual Joystick")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Virtual Joystick" parent="CanvasLayer" instance=ExtResource("5_mofo5")]
+offset_left = 841.0
+offset_top = -311.0
+offset_right = 1141.0
+offset_bottom = -11.0

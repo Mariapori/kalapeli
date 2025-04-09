@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhnfbkwqtb7pc"]
+
+[ext_resource type="Script" uid="uid://c1xdeqjs02avq" path="res://scripts/joystick.gd" id="1_g36iv"]
+
+[sub_resource type="Gradient" id="Gradient_g36iv"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0.67451, 1, 1, 1, 0.266667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qxmy8"]
+gradient = SubResource("Gradient_g36iv")
+
+[sub_resource type="Gradient" id="Gradient_m03u7"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_luu5j"]
+gradient = SubResource("Gradient_m03u7")
+
+[node name="Joystick" type="Node2D"]
+script = ExtResource("1_g36iv")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 94.0
+offset_bottom = 94.0
+texture = SubResource("GradientTexture2D_qxmy8")
+
+[node name="Handle" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 81.0
+offset_bottom = 80.0
+texture = SubResource("GradientTexture2D_luu5j")

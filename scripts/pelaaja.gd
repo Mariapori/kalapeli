@@ -1,27 +1,20 @@
 extends Node2D
 
-@export var speed = 5
+@export var speed = 250
 @export var level = 1
-@export var zoom_factor: float = 0.5  # Tämä määrittää, kuinka paljon kamera zoomaa pelaajan koon kasvaessa
-@export var max_zoom_out: float = 10  # Suurin zoom-ulosarvo
-@export var min_zoom_in: float = 1  # Pienin zoom-ulosarvo
-
+@export var zoom_factor: float = 0.5
+@export var max_zoom_out: float = 10  
+@export var min_zoom_in: float = 1 
+@export var cam : Camera2D
+@export var joystick : VirtualJoystick
 func _physics_process(delta: float) -> void:	
 	
 	scale = Vector2(1, 1) * (1 + (level - 1) * 0.1)
 	var target_zoom = clamp(1 / scale.length() * zoom_factor, min_zoom_in, max_zoom_out)
-	$Camera2D.zoom = Vector2(target_zoom, target_zoom)
+	cam.zoom = Vector2(target_zoom, target_zoom)
+	cam.position = self.position
 	$Label.text = str(level)
-	var velocity = Vector2.ZERO
-	
-	if Input.is_key_pressed(KEY_D):
-		velocity.x += speed
-	if Input.is_key_pressed(KEY_A):
-		velocity.x -= speed
-	if Input.is_key_pressed(KEY_W):
-		velocity.y -= speed
-	if Input.is_key_pressed(KEY_S):
-		velocity.y += speed
+	var velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * speed * delta
 	
 	if not is_outside_border(self, $"../TextureRect", velocity):
 		self.translate(velocity)
@@ -30,9 +23,12 @@ func _physics_process(delta: float) -> void:
 		rotation = velocity.angle()
 		if velocity.x < 0:
 			$Sprite2D.scale.y = -1
+			$Label.scale.y = -1
+			$Label.scale.x = -1
 		else:
 			$Sprite2D.scale.y = 1
-
+			$Label.scale.y = 1
+			$Label.scale.x = 1
 	
 
 func eatOrDead(fish: Node2D) -> void:
