@@ -6,6 +6,7 @@ extends Node2D
 @export var max_zoom_out: float = 10  
 @export var min_zoom_in: float = 1 
 @export var cam : Camera2D
+@export var fishEat: AudioStream
 @export var joystick : VirtualJoystick
 func _physics_process(delta: float) -> void:	
 	
@@ -34,11 +35,14 @@ func _physics_process(delta: float) -> void:
 func eatOrDead(fish: Node2D) -> void:
 	if fish.level <= level:
 		level += fish.level
+		$AudioStreamPlayer.stream = fishEat
+		$AudioStreamPlayer.play()
+		if level >= 300:
+			get_tree().reload_current_scene()
 		fish.queue_free()
 	else:
-		# TODO: Make gameover logic
-		print("Et voi syödä isompaa kalaa")
-		pass
+		get_tree().reload_current_scene()
+		
 		
 func is_outside_border(moving_node: Node2D, border_node: TextureRect, velocity: Vector2) -> bool:
 	var new_position = moving_node.global_position + velocity
